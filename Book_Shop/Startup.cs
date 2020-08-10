@@ -23,7 +23,7 @@ namespace Book_Shop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddMvc();
         }
 
 
@@ -41,7 +41,10 @@ namespace Book_Shop
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
+            app.UseStatusCodePages(); // Відображення статус і код сторінки
+
+            app.UseStaticFiles(); // Відображення статичних файлів(картинки і тд.)
 
             app.UseRouting();
 
