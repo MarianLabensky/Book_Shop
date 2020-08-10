@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Book_Shop.Data.interfaces
 {
     // інтерфейс для масштабування додавання нових жанрів
-    interface IAllGenres
+    public interface IAllGenres
     {
         IEnumerable<Genre> AllGenres { get; }
     }

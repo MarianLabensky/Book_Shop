@@ -2,12 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Book_Shop.Data.interfaces;
+using Book_Shop.Data.Mocks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+//TODO:   Зробити шлях books/{genre}/{bookName}
+//        Створити сторінку і контролер жанрів genre/
+//        При виборі жанру перенаправлення на books/{genre}
+
+
 
 namespace Book_Shop
 {
@@ -23,7 +31,15 @@ namespace Book_Shop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            
+            services.AddTransient<IAllBooks, MockBooks>();
+            services.AddTransient<IAllGenres, MockGenres>();
+
+            
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
 
