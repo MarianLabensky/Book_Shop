@@ -1,7 +1,36 @@
-﻿@page
+﻿@page "{genre?}/{bookName?}"
 @model Book_Shop.Pages.Books.IndexModel
+
+
 @{
-    ViewData["Title"] = "Index";
+    if (Model.bookName == null)
+    {
+        <h2>@Model.CurrentCatalog</h2>
+
+        if (Model.bookName == null && Model.genre != null)
+        {
+            <p style="font-size: 1.3em">
+                @Model.PageGenre.Desc
+            </p>
+        }
+
+
+        <div class="row mt-5 mb-2">
+            @{
+                if (Model.AllBooks != null)
+                {
+                    foreach (Book item in Model.AllBooks)
+                    {
+                        @Html.Partial("BookItem", item);
+                    }
+                }
+
+            }
+        </div>
+    }
+    else
+    {
+        @Html.Partial("BookItemPage", Model.PageBook);
+    }
 }
 
-<h1>Index</h1>

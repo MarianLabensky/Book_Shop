@@ -28,7 +28,7 @@ namespace Book_Shop.Data.Mocks
                         CountPages= 608, 
                         ShortDesc="", 
                         LongDesc="", 
-                        ImgPath=""},
+                        ImgPath="/img/institut.jpg"},
 
                     new Book{
                         BookName = "Воно", 
@@ -42,7 +42,7 @@ namespace Book_Shop.Data.Mocks
                         CountPages= 1344, 
                         ShortDesc="", 
                         LongDesc="", 
-                        ImgPath=""},
+                        ImgPath="/img/vono.jpg"},
                     
                     new Book{
                         BookName = "Аутсайдер", 
@@ -56,7 +56,7 @@ namespace Book_Shop.Data.Mocks
                         CountPages= 592, 
                         ShortDesc="", 
                         LongDesc="", 
-                        ImgPath=""},
+                        ImgPath="/img/autsayder.jpg"},
                     //---------------------------------------------
                     new Book{
                         BookName = "На крилах мрії", 
@@ -70,7 +70,7 @@ namespace Book_Shop.Data.Mocks
                         CountPages= 512, 
                         ShortDesc="", 
                         LongDesc="", 
-                        ImgPath=""},
+                        ImgPath="/img/na-krilah-mriyi.jpg"},
 
                     new Book{
                         BookName = "Похищение как повод для романа", 
@@ -84,7 +84,7 @@ namespace Book_Shop.Data.Mocks
                         CountPages= 320, 
                         ShortDesc="",
                         LongDesc="", 
-                        ImgPath=""},
+                        ImgPath="/img/pohishchenie-kak-povod-dlya-romana.jpg"},
 
                     new Book{BookName = "Жених напрокат", 
                         BookGenre = genres.AllGenres.FirstOrDefault(c => c.TagName=="love_novels"),
@@ -97,7 +97,7 @@ namespace Book_Shop.Data.Mocks
                         CountPages= 288, 
                         ShortDesc="",
                         LongDesc="", 
-                        ImgPath=""},
+                        ImgPath="/img/jenih-naprokat.jpg"},
                     //---------------------------------------------
                     new Book{BookName = "Адвокат диявола",
                         BookGenre = genres.AllGenres.FirstOrDefault(c => c.TagName=="horrors"),
@@ -110,7 +110,7 @@ namespace Book_Shop.Data.Mocks
                         CountPages= 288,
                         ShortDesc="", 
                         LongDesc="",
-                        ImgPath=""},
+                        ImgPath="/img/advokat-diyavola.jpg"},
 
                     new Book{BookName = "Містер Мерседес", 
                         BookGenre = genres.AllGenres.FirstOrDefault(c => c.TagName=="horrors"),
@@ -123,7 +123,7 @@ namespace Book_Shop.Data.Mocks
                         CountPages= 544, 
                         ShortDesc="", 
                         LongDesc="", 
-                        ImgPath=""},
+                        ImgPath="/img/mister-mersedes.jpg"},
 
                     new Book{BookName = "Похищение Энни Торн",
                         BookGenre = genres.AllGenres.FirstOrDefault(c => c.TagName=="horrors"),
@@ -136,7 +136,7 @@ namespace Book_Shop.Data.Mocks
                         CountPages= 288,
                         ShortDesc="", 
                         LongDesc="",
-                        ImgPath="" }
+                        ImgPath="/img/pohishchenie-enni-torn.jpg" }
                 };
             }
         }

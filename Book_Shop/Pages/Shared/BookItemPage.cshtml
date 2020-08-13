@@ -1,0 +1,40 @@
+﻿@using Book_Shop.Data.models
+@model Book
+
+<div class="row mt-5 mb-5">
+    <div class="col-lg-5">
+        <img class="img-fluid"
+             src="@Model.ImgPath"
+             alt="@Model.BookName"
+             style="height: 400px; margin: 5% 20%;" />
+    </div>
+    <div class="col-lg-6" id="features" style="margin: 0 auto 0 0;">
+        <h2>@Model.BookName</h2>
+        <p>@Model.WrittenBy</p>
+        <p>Жанр: @Model.BookGenre.GenreName</p>
+        <p>Рік видання: @Model.WriteYear</p>
+        <p>Мова: @Model.WriteLanguage</p>
+        <p>Кількість сторінок: @Model.CountPages с.</p>
+        <p>Рейтинг: @Model.BookRate</p>
+        <div class="price">
+            <p>@Model.Price.ToString("c")</p>
+        </div>
+        <p><a class="btn btn-warning" id="button1" href="#">В корзину</a></p>
+    </div>
+</div>
+<div class="container col-lg-11" id="about_book">
+    <h3>Про книгу</h3>
+    <p>
+        @{ 
+            if (Model.LongDesc != "")
+            {
+               @Model.LongDesc;
+            }
+            else
+            {
+                <span> На жаль опису дано книги ще немає.</span>
+            }
+        }
+       
+    </p>
+</div>

@@ -1,0 +1,14 @@
+﻿@using Book_Shop.Data.models
+@model Book
+
+
+    <div class="col-lg-4 mb-4">
+        <img class="img-fluid" src="@Model.ImgPath" alt="@Model.BookName" style="height: 400px"/>
+        <div>
+            <h3>@Model.BookName </h3>
+            <p class="text-secondary">@Model.WrittenBy</p>
+            <p>Жанр: @Model.BookGenre.GenreName</p>
+        </div> 
+        <p>Ціна: @Model.Price.ToString("c") </p>
+        <p><a class="btn btn-warning" href="/Books/@Model.BookGenre.TagName/@Model.TagName">Детальніше</a></p>
+    </div>

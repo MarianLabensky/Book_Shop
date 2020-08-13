@@ -11,8 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-//TODO:   Зробити шлях books/{genre}/{bookName}
-//        Створити сторінку і контролер жанрів genre/
+//TODO:   Зробити шлях books/{genre}/{bookName} на основі razor pages
+//        Створити razor-сторінку жанрів genre/
 //        При виборі жанру перенаправлення на books/{genre}
 
 
@@ -31,12 +31,11 @@ namespace Book_Shop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddRazorPages();
             services.AddTransient<IAllBooks, MockBooks>();
             services.AddTransient<IAllGenres, MockGenres>();
 
             
-            services.AddMvc(option => option.EnableEndpointRouting = false);
 
             services.AddMemoryCache();
             services.AddSession();
