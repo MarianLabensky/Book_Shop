@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Book_Shop.Data;
 using Book_Shop.Data.interfaces;
 using Book_Shop.Data.Mocks;
+using Book_Shop.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,12 +34,14 @@ namespace Book_Shop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AppDBContext>(options => options.UseSqlServer(connection));
+            services.AddTransient<IAllBooks, BooksRepository>();
+            services.AddTransient<IAllGenres, GenresRepository>();
+
+
             services.AddRazorPages();
-            services.AddTransient<IAllBooks, MockBooks>();
-            services.AddTransient<IAllGenres, MockGenres>();
-
-            
-
             services.AddMemoryCache();
             services.AddSession();
         }
@@ -69,6 +74,12 @@ namespace Book_Shop
             {
                 endpoints.MapRazorPages();
             });
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                AppDBContext content = scope.ServiceProvider.GetRequiredService<AppDBContext>();
+                AddToDB.Initial(content);
+            }
         }
     }
 }
