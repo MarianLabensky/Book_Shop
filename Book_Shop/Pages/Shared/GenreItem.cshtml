@@ -1,0 +1,10 @@
+﻿@using Book_Shop.Data.models
+@model Genre
+
+<div class="col-lg-4 mb-4">
+    <a href="/Books/@Model.TagName">
+        <img src="@Model.ImgPath" alt="@Model.GenreName" style="height: 300px" />
+    </a>
+        <p><a class="text-info" href="/Books/@Model.TagName"><h4>@Model.GenreName</h4></a></p>
+</div>
+

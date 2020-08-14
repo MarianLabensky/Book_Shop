@@ -15,6 +15,8 @@ namespace Book_Shop.Data.models
 
         public string Desc { get; set; } // Опис жанру
 
+        public string ImgPath { get; set; } // Посилання на фотографію обкладинки жанру
+
         public List<Book> Books { get; set; } // Список книг, які відносяться до даного жанру
 
     }

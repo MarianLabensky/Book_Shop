@@ -1,0 +1,14 @@
+﻿@page
+@model Book_Shop.Pages.Genres.IndexModel
+
+<div class="row mt-5 mb-2">
+    @{
+        if (Model.AllGenres != null)
+        {
+            foreach (Genre item in Model.AllGenres)
+            {
+                @Html.Partial("GenreItem", item);
+            }
+        }
+    }
+</div>
