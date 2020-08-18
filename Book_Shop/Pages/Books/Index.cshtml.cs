@@ -6,6 +6,7 @@ using Book_Shop.Data.interfaces;
 using Book_Shop.Data.models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Book_Shop.Pages.Books
 {
@@ -17,8 +18,13 @@ namespace Book_Shop.Pages.Books
 
         public Genre PageGenre { get; set; } // Використовується при відображенні книг ПЕВНОГО ЖАНРУ
 
-        public string CurrentSelector { get; set; } = "byRate"; // змінна, для визначення типу селектору,
+        // список елементів селектору
+        private string[] source = { "За рейтингом", "За роком видання", "За ціною: від дорогих", "За ціною: від дешевих" };
+
+        private string CurrentSelector { get; set; } // змінна, для визначення типу селектору,
                                                                 // за замовчуванням (за рейтингом)
+
+        public SelectList SortSelector { get; set; } // змінна в якій зберігаються елементи селектору
 
         private readonly IAllBooks _allBooks;
 
@@ -42,22 +48,26 @@ namespace Book_Shop.Pages.Books
 
         public void OnGet()
         {
-            if (bookName == null && genre == null)
+            if (bookName == null) 
             {
-                AllBooks = _allBooks.Books.OrderByDescending(c => c.BookRate);
-            }
-            else if (bookName == null && genre != null)
-            {
-                AllBooks = _allBooks.Books.Where(c => c.BookGenre.TagName == genre).OrderByDescending(c => c.BookRate);
-                PageGenre = _allGenres.AllGenres.FirstOrDefault(c => c.TagName == genre);
-                CurrentCatalog = PageGenre.GenreName;
+               SortSelector = new SelectList(source, source[0]);
+
+                if (genre == null)
+                {
+                    AllBooks = _allBooks.Books.OrderByDescending(c => c.BookRate);
+                }
+                else
+                {
+                    AllBooks = _allBooks.Books.Where(c => c.BookGenre.TagName == genre).OrderByDescending(c => c.BookRate);
+                    PageGenre = _allGenres.AllGenres.FirstOrDefault(c => c.TagName == genre);
+                    CurrentCatalog = PageGenre.GenreName;
+                }
             }
             else
             {
                 PageBook = _allBooks.Books.FirstOrDefault(c => c.TagName == bookName);
             }
         }
-
 
         public void OnPost(string sortSelector)
         {
@@ -70,23 +80,26 @@ namespace Book_Shop.Pages.Books
 
             switch (sortSelector)
             {
-                case "byYear":
+                case "За роком видання":
                     AllBooks = AllBooks.OrderByDescending(c => c.WriteYear);
-                    CurrentSelector = "byYear";
+                    CurrentSelector = source[1];
                     break;
-                case "byPriceDown":
+                case "За ціною: від дорогих":
                     AllBooks = AllBooks.OrderByDescending(c => c.Price);
-                    CurrentSelector = "byPriceDown";
+                    CurrentSelector = source[2];
                     break;
-                case "byPriceUp":
+                case "За ціною: від дешевих":
                     AllBooks = AllBooks.OrderBy(c => c.Price);
-                    CurrentSelector = "byPriceUp";
+                    CurrentSelector = source[3];
                     break;
                 default:
                     AllBooks = AllBooks.OrderByDescending(c => c.BookRate);
-                    CurrentSelector = "byRate";
+                    CurrentSelector = source[0];
                     break;
             }
+
+            SortSelector = new SelectList(source, CurrentSelector);
+
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿@page "{genre?}/{bookName?}"
 @model Book_Shop.Pages.Books.IndexModel
-@Html.AntiForgeryToken()
 
 @{
     if (Model.bookName == null)
@@ -17,55 +16,18 @@
         }
 
         // Форма для вибору впорядкування: за рейтингом(за замовчуванням), за роком виданняб за ціною вниз, за ціною вверх
-        <form method="post">
-            <div>
-                <div class="form-group row" style="width: 300px; margin-right: 0px; margin-left: auto">
-                    <label for="select1" class="col-form-label">Сортувати</label>
-                    <div class="col">
-                        <select class="form-control" id="select1" name="sortSelector" onchange="this.form.submit()">
-                            @{
-                                // за рейтингом
-                                if (Model.CurrentSelector == "byRate")
-                                {
-                                    <option selected value="byRate">За рейтингом</option>
-                                }
-                                else
-                                {
-                                    <option value="byRate">За рейтингом</option>
-                                }
-                                // за роком видання
-                                if (Model.CurrentSelector == "byYear")
-                                {
-                                    <option selected value="byYear">За роком видання</option>
-                                }
-                                else
-                                {
-                                    <option value="byYear">За роком видання</option>
-                                }
-                                // від дорогих до дешевих
-                                if (Model.CurrentSelector == "byPriceDown")
-                                {
-                                    <option selected value="byPriceDown">За ціною: від дорогих</option>
-                                }
-                                else
-                                {
-                                    <option value="byPriceDown">За ціною: від дорогих</option>
-                                }
-                                // від дешевих до дорогих
-                                if (Model.CurrentSelector == "byPriceUp")
-                                {
-                                    <option selected value="byPriceUp">За ціною: від дешевих</option>
-                                }
-                                else
-                                {
-                                    <option value="byPriceUp">За ціною: від дешевих</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </div>
+<form method="post" asp-antiforgery="false">
+    <div>
+        <div class="form-group row" style="width: 300px; margin-right: 0px; margin-left: auto">
+            <label for="select1" class="col-form-label">Сортувати</label>
+            <div class="col">
+                <select class="form-control" id="select1" name="sortSelector" asp-items="@Model.SortSelector" onchange="this.form.submit()">
+                  
+                </select>
             </div>
-        </form>
+        </div>
+    </div>
+</form>
 
         <div class="row mt-5 mb-2">
             @{
