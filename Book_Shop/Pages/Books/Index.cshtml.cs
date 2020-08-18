@@ -40,7 +40,7 @@ namespace Book_Shop.Pages.Books
             if (bookName == null && genre == null)
             {
                 AllBooks = _allBooks.Books.OrderByDescending(c => c.BookRate);
-                CurrentCatalog = "Найкращі книги";
+                CurrentCatalog = "Всі книги";
             }
             else if (bookName == null && genre != null)
             {

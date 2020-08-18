@@ -1,0 +1,34 @@
+﻿a.item_link:link {
+    text-decoration: none;
+    color: #212529;
+}
+
+a.item_link:visited {
+    text-decoration: none;
+    color: #212529;
+}
+
+a.item_link:active {
+    text-decoration: none;
+    color: #212529;
+}
+
+a.item_link {
+    display: block;
+}
+
+    a.item_link:hover {
+        text-decoration: none;
+        color: #212529;
+    }
+
+.bookItem:hover {
+    border: 1px solid rgb(202, 200, 200);
+    border-radius: 10px;
+}
+
+.bookItem {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 4%;
+}
