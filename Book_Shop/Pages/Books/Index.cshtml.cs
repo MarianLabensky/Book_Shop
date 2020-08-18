@@ -17,6 +17,9 @@ namespace Book_Shop.Pages.Books
 
         public Genre PageGenre { get; set; } // Використовується при відображенні книг ПЕВНОГО ЖАНРУ
 
+        public string CurrentSelector { get; set; } = "byRate"; // змінна, для визначення типу селектору,
+                                                                // за замовчуванням (за рейтингом)
+
         private readonly IAllBooks _allBooks;
 
         private readonly IAllGenres _allGenres;
@@ -26,13 +29,15 @@ namespace Book_Shop.Pages.Books
         [BindProperty(SupportsGet = true)]
         public string bookName { get; set; } // назва книги, отриманої з url-строки
 
-        public string CurrentCatalog { get; set; }
+        public string CurrentCatalog { get; set; } = "Всі книги";
 
         public IndexModel(IAllBooks allBooks, IAllGenres allGenres)
         {
             _allBooks = allBooks;
 
             _allGenres = allGenres;
+
+            AllBooks = _allBooks.Books;
         }
 
         public void OnGet()
@@ -40,7 +45,6 @@ namespace Book_Shop.Pages.Books
             if (bookName == null && genre == null)
             {
                 AllBooks = _allBooks.Books.OrderByDescending(c => c.BookRate);
-                CurrentCatalog = "Всі книги";
             }
             else if (bookName == null && genre != null)
             {
@@ -55,5 +59,34 @@ namespace Book_Shop.Pages.Books
         }
 
 
+        public void OnPost(string sortSelector)
+        {
+            if (genre != null)
+            {
+                AllBooks = AllBooks.Where(c => c.BookGenre.TagName == genre);
+                PageGenre = _allGenres.AllGenres.FirstOrDefault(c => c.TagName == genre);
+                CurrentCatalog = PageGenre.GenreName;
+            }
+
+            switch (sortSelector)
+            {
+                case "byYear":
+                    AllBooks = AllBooks.OrderByDescending(c => c.WriteYear);
+                    CurrentSelector = "byYear";
+                    break;
+                case "byPriceDown":
+                    AllBooks = AllBooks.OrderByDescending(c => c.Price);
+                    CurrentSelector = "byPriceDown";
+                    break;
+                case "byPriceUp":
+                    AllBooks = AllBooks.OrderBy(c => c.Price);
+                    CurrentSelector = "byPriceUp";
+                    break;
+                default:
+                    AllBooks = AllBooks.OrderByDescending(c => c.BookRate);
+                    CurrentSelector = "byRate";
+                    break;
+            }
+        }
     }
 }
