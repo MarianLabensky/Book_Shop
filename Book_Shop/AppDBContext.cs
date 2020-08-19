@@ -14,11 +14,15 @@ namespace Book_Shop.Data
 
         public DbSet<Genre> Genres { get; set; }
 
+        public DbSet<ShopCartItem> ShopCartItems { get; set; }
+
+
         public AppDBContext(DbContextOptions<AppDBContext> options)
             : base(options)
         {
             Database.EnsureCreated();
         }
+
 
     }
 }

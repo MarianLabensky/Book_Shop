@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Book_Shop.Data;
 using Book_Shop.Data.interfaces;
 using Book_Shop.Data.Mocks;
+using Book_Shop.Data.models;
 using Book_Shop.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,10 +43,15 @@ namespace Book_Shop
             services.AddTransient<IAllBooks, BooksRepository>();
             services.AddTransient<IAllGenres, GenresRepository>();
 
-
-            services.AddRazorPages();
             services.AddMemoryCache();
             services.AddSession();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShopCart.GetCart(sp));
+
+            services.AddRazorPages();
+
+  
 
             services.AddMvc().AddRazorPagesOptions(options =>
             {
@@ -75,6 +82,7 @@ namespace Book_Shop
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession(); // Для сесій обов'язково
 
             app.UseEndpoints(endpoints =>
             {

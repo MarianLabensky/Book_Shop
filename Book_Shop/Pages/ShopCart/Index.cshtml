@@ -1,0 +1,14 @@
+﻿@page
+@model Book_Shop.Pages.ShopCart.IndexModel
+
+<div class="container">
+    @foreach (var item in Model.ShopCart.ListShopItems)
+    {
+        <div class="alert alert-warning mt-3">
+            <b>Книга: </b> @item.Book.BookName <br />
+            <b>Ціна: </b> @item.Book.Price.ToString("c") <br />
+        </div>
+    }
+    <br />
+    <a class="btn btn-danger mb-5" asp-page="">Оплатити</a>
+</div>
