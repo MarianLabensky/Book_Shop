@@ -1,14 +1,26 @@
 ﻿@page
 @model Book_Shop.Pages.ShopCart.IndexModel
 
-<div class="container">
-    @foreach (var item in Model.ShopCart.ListShopItems)
-    {
-        <div class="alert alert-warning mt-3">
-            <b>Книга: </b> @item.Book.BookName <br />
-            <b>Ціна: </b> @item.Book.Price.ToString("c") <br />
-        </div>
-    }
-    <br />
-    <a class="btn btn-danger mb-5" asp-page="">Оплатити</a>
-</div>
+    <div class="container">
+        @{
+            if (Model.ShopCart.ListShopItems.Count != 0)
+            {
+                @foreach (var item in Model.ShopCart.ListShopItems)
+                {
+                    <div class="alert alert-warning mt-3">
+                        <b>Книга: </b> @item.Book.BookName <br />
+                        <b>Ціна: </b> @item.Book.Price.ToString("c") <br />
+                    </div>
+                }
+
+                <br />
+                <a class="btn btn-danger mb-5" asp-page="/Order/Index">Замовити</a>
+            }
+            else
+            {
+                <p class="text-center text-dark mt-4 pt-4">@Model.MessageEmptyCart 
+                    <a class="alert-link" asp-page="/Books/Index">@Model.MessageLinkForBuy</a> 
+                </p>
+            }
+        }
+    </div>

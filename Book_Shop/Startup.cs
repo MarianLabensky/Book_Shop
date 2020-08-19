@@ -42,6 +42,7 @@ namespace Book_Shop
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(connection));
             services.AddTransient<IAllBooks, BooksRepository>();
             services.AddTransient<IAllGenres, GenresRepository>();
+            services.AddTransient<IAllOrders, OrdersRepository>();
 
             services.AddMemoryCache();
             services.AddSession();

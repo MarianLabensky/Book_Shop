@@ -16,6 +16,10 @@ namespace Book_Shop.Data
 
         public DbSet<ShopCartItem> ShopCartItems { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+
 
         public AppDBContext(DbContextOptions<AppDBContext> options)
             : base(options)

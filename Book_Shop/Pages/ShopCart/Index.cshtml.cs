@@ -16,12 +16,20 @@ namespace Book_Shop.Pages.ShopCart
     {
 
         private readonly Data.models.ShopCart _shopCart;
+        private readonly IAllBooks _bookRepository;
 
-        public Data.models.ShopCart ShopCart { get; set; }
+        // повідомлення про те, що корзина пуста(випливає коли корзина пуста)
+        public string MessageEmptyCart { get; set; } = "Вибачте, але корзина пуста.";
 
-        public IndexModel( Data.models.ShopCart shopCart)
+        // Текст посилання для покупок(випливає коли корзина пуста)
+        public string MessageLinkForBuy { get; set; } = "Це потрібно виправити!";
+
+        //  публічний екземпляр корзини, в якому зберігаються додані товари
+        public Data.models.ShopCart ShopCart { get; set; } 
+
+        public IndexModel(IAllBooks bookRepository, Data.models.ShopCart shopCart)
         {
-
+            _bookRepository = bookRepository;
             _shopCart = shopCart;
         }
 
@@ -32,6 +40,16 @@ namespace Book_Shop.Pages.ShopCart
             ShopCart = _shopCart;
         }
 
+        public void OnGetAdd(int id)
+        {
+           var item = _bookRepository.Books.FirstOrDefault(i => i.Id == id);
+
+            if (item != null)
+            {
+                _shopCart.AddToCart(item);
+            }
+            OnGet();
+        }
 
     }
 }

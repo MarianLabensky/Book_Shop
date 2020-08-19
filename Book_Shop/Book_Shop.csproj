@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200819124929_ShopCart.cs" />
+    <Compile Remove="Migrations\20200819124929_ShopCart.Designer.cs" />
+    <Compile Remove="Migrations\20200819232713_Orders.cs" />
+    <Compile Remove="Migrations\20200819232713_Orders.Designer.cs" />
+    <Compile Remove="Migrations\20200819233418_ord.cs" />
+    <Compile Remove="Migrations\20200819233418_ord.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
