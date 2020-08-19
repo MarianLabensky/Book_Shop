@@ -22,7 +22,7 @@ namespace Book_Shop.Pages.Books
         private string[] source = { "За рейтингом", "За роком видання", "За ціною: від дорогих", "За ціною: від дешевих" };
 
         private string CurrentSelector { get; set; } // змінна, для визначення типу селектору,
-                                                                // за замовчуванням (за рейтингом)
+                                                                
 
         public SelectList SortSelector { get; set; } // змінна в якій зберігаються елементи селектору
 
@@ -69,6 +69,7 @@ namespace Book_Shop.Pages.Books
             }
         }
 
+        // метод отримує дані від селектора і впорядковує книги в заданому порядку 
         public void OnPost(string sortSelector)
         {
             if (genre != null)
@@ -99,7 +100,6 @@ namespace Book_Shop.Pages.Books
             }
 
             SortSelector = new SelectList(source, CurrentSelector);
-
         }
     }
 }
