@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\img\GenreImg\" />
+    <Folder Include="wwwroot\img\Новая папка\" />
   </ItemGroup>
 
 </Project>

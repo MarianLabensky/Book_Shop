@@ -3,56 +3,58 @@
 
     <div class="container">
         @{
+
+
             if (Model.ShopCart.ListShopItems.Count != 0)
             {
-               
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
+                <h2>Корзина</h2>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td class="text-center">Зображення</td>
+                                <td class="text-left">Назва книги</td>
+                                <td class="text-left">Жанр</td>
+                                <td class="text-right">Ціна товару</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.ShopCart.ListShopItems)
+                            {
                                 <tr>
-                                    <td class="text-center">Зображення</td>
-                                    <td class="text-left">Назва книги</td>
-                                    <td class="text-left">Жанр</td>
-                                    <td class="text-right">Ціна товару</td>
+                                    <td class="text-center"> <a href="/Books/@item.Book.BookGenre.TagName/@item.Book.TagName"><img src="@item.Book.ImgPath" alt="@item.Book.BookName" title="@item.Book.BookName" class="img-thumbnail" style="height: 80px"></a> </td>
+                                    <td class="text-left">
+                                        <a class="alert-link font-weight-normal" href="/Books/@item.Book.BookGenre.TagName/@item.Book.TagName">@item.Book.BookName</a><br>
+                                        <small class="text-secondary">@item.Book.WrittenBy</small>
+                                    </td>
+                                    <td class="text-left">
+                                        <a class="alert-link font-weight-normal" href="/Books/@item.Book.BookGenre.TagName">@item.Book.BookGenre.GenreName</a>
+                                    </td>
+                                    <td class="text-right align-middle"><span class="text-price">@item.Book.Price.ToString("c")</span></td>
+                                    <td class="text-center align-middle">
+                                        <form asp-antiforgery="false" method="post">
+                                            <span class="input-group-btn">
+                                                <button type="submit" class="btn-danger btn" asp-page-handler="Remove" asp-route-Id="@item.Id" data-original-title="Remove" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </span>
+                                        </form>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
+                            }
+                            <tr>
+                                <td colspan="4" class="text-right"><p class="h3">Всього: @Model.AllPrice.ToString("c")</p></td>
+                            </tr>
+                        </tbody>
 
-                                @foreach (var item in Model.ShopCart.ListShopItems)
-                                {
-                                    <tr>
-                                        <td class="text-center"> <a href="/Books/@item.Book.BookGenre.TagName/@item.Book.TagName"><img src="@item.Book.ImgPath" alt="@item.Book.BookName" title="@item.Book.BookName" class="img-thumbnail" style="height: 80px"></a> </td>
-                                        <td class="text-left">
-                                            <a class="alert-link font-weight-normal" href="/Books/@item.Book.BookGenre.TagName/@item.Book.TagName">@item.Book.BookName</a><br>
-                                            <small class="text-secondary">@item.Book.WrittenBy</small>
-                                        </td>
-                                        <td class="text-left">
-                                            <a class="alert-link font-weight-normal" href="/Books/@item.Book.BookGenre.TagName">@item.Book.BookGenre.GenreName</a>
-                                        </td>
-                                        <td class="text-right align-middle"><span class="text-price">@item.Book.Price.ToString("c")</span></td>
-                                        <td class="text-center align-middle">
-                                            <form asp-antiforgery="false" method="post">
-                                                <span class="input-group-btn">
-                                                    <button type="submit" class="btn-danger btn" asp-page-handler="Remove" asp-route-Id="@item.Id" data-original-title="Remove" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                </span>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                }
-                                <tr>
-                                    <td colspan="4" class="text-right"><p class="h3">Всього: @Model.AllPrice.ToString("c")</p></td>
-                                </tr>
-                            </tbody>
+                    </table>
 
-                        </table>
+                </div>
 
-                    </div>
-
-                    <br />
-                    <div class="mb-5 btn-group">
-                        <a class="btn btn-primary" asp-page="/Order/Index">Замовити</a> @*asp-page="/Order/Index"*@
-                        <a class="btn btn-secondary" asp-page="/Books/Index">Продовжити покупки</a>
-                    </div>
+                <div class="btn-group">
+                    <a class="btn btn-primary" asp-page="/Order/Index">Замовити</a> @*asp-page="/Order/Index"*@
+                    <a class="btn btn-secondary" asp-page="/Books/Index">Продовжити покупки</a>
+                </div>
 
 
 
@@ -62,9 +64,9 @@
             {
                 <p class="text-center text-dark mt-4 pt-4">
                     @Model.MessageEmptyCart
-                <a class="alert-link" asp-page="/Books/Index">@Model.MessageLinkForBuy</a>
-            </p>
-        }
+                    <a class="alert-link" asp-page="/Books/Index">@Model.MessageLinkForBuy</a>
+                </p>
+            }
         }
     </div>
 
