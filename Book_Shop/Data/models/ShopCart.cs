@@ -48,10 +48,23 @@ namespace Book_Shop.Data.models
             AppDBContent.SaveChanges();
         }
 
+        // видалити товар із замовлення
+        public void RemoveFromCart(int Id)
+        {
+            ShopCartItem item = AppDBContent.ShopCartItems.FirstOrDefault(c => c.Id == Id);
+
+            if (item != null)
+            {
+                AppDBContent.ShopCartItems.Remove(item);
+            }
+
+            AppDBContent.SaveChanges();
+        }
+
         // отримати список елементів замовлення включаючи екземпляр замовленої книги
         public List<ShopCartItem> GetShopItems()
         {
-            return AppDBContent.ShopCartItems.Where(c => c.ShopCartId == ShopCartId).Include(s => s.Book).ToList();
+            return AppDBContent.ShopCartItems.Where(c => c.ShopCartId == ShopCartId).Include(s => s.Book).ThenInclude(q => q.BookGenre).ToList();
         }
     }
 }

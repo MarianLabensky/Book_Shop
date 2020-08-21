@@ -12,11 +12,29 @@ using Book_Shop.Data.Repository;
 
 namespace Book_Shop.Pages.ShopCart
 {
+    //Delete
+
     public class IndexModel : PageModel
     {
 
         private readonly Data.models.ShopCart _shopCart;
         private readonly IAllBooks _bookRepository;
+
+        //Вартість всіх товарів в корзині
+        public float AllPrice {
+            get
+            {
+                float allPrice = 0;
+                if (ShopCart.ListShopItems.Count != 0)
+                {
+                    foreach (var item in ShopCart.ListShopItems)
+                    {
+                        allPrice += item.Price;
+                    }
+                }
+                return allPrice;
+            }
+        }
 
         // повідомлення про те, що корзина пуста(випливає коли корзина пуста)
         public string MessageEmptyCart { get; set; } = "Вибачте, але корзина пуста.";
@@ -50,6 +68,15 @@ namespace Book_Shop.Pages.ShopCart
             }
             OnGet();
         }
+
+        public void OnPostRemove(int Id)
+        {
+            _shopCart.RemoveFromCart(Id);
+            
+            OnGet();
+        }
+
+
 
     }
 }
