@@ -38,6 +38,7 @@ namespace Book_Shop.Data.Repository
                 AppDBContext.OrderItems.Add(elem);
             }
 
+            AppDBContext.SaveChanges();
         }
     }
 }
