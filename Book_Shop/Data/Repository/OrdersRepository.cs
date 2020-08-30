@@ -33,7 +33,9 @@ namespace Book_Shop.Data.Repository
                 {
                     Price = item.Price,
                     BookId = item.Id,
-                    OrderId = order.Id
+                    OrderId = order.Id,
+                    Book = item.Book,
+                    Order = order
                 };
                 AppDBContext.OrderItems.Add(elem);
             }
