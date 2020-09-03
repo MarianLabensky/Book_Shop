@@ -21,7 +21,12 @@
             <p>@Model.Price.ToString("c")</p>
         </div>
         @*посилання на корзину*@
-        <p><a class="btn btn-warning" id="button1" asp-page="/ShopCart/Index" asp-page-handler="add" asp-route-id="@Model.Id">В корзину</a></p>
+    <form method="post" asp-antiforgery="false">
+        <p>
+            <input class="btn btn-warning" id="button1" type="submit" asp-route-Bookid="@Model.Id" asp-page-handler="AddToShopCart" value="В корзину" /> 
+        </p>
+
+    </form>
     </div>
     </div>
 <div class="container col-lg-11" id="about_book">

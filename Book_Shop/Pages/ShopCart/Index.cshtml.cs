@@ -58,16 +58,17 @@ namespace Book_Shop.Pages.ShopCart
             ShopCart = _shopCart;
         }
 
-        public void OnGetAdd(int id)
-        {
-           var item = _bookRepository.Books.FirstOrDefault(i => i.Id == id);
+        // більше не потрібно, оскільки додано новий метод на сторінці кожної книги
+        //public void OnGetAdd(int id)
+        //{
+        //   var item = _bookRepository.Books.FirstOrDefault(i => i.Id == id);
 
-            if (item != null)
-            {
-                _shopCart.AddToCart(item);
-            }
-            OnGet();
-        }
+        //    if (item != null)
+        //    {
+        //        _shopCart.AddToCart(item);
+        //    }
+        //    OnGet();
+        //}
 
         public void OnPostRemove(int Id)
         {

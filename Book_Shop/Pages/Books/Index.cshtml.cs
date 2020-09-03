@@ -30,6 +30,8 @@ namespace Book_Shop.Pages.Books
 
         private readonly IAllGenres _allGenres;
 
+        private readonly Data.models.ShopCart _shopCart; //тимчасова змінна для запису екземпляру книги в ShopCartBD
+
         [BindProperty(SupportsGet = true)]
         public string genre { get; set; } // назва жанру, отриманого з url-строки
         [BindProperty(SupportsGet = true)]
@@ -37,13 +39,15 @@ namespace Book_Shop.Pages.Books
 
         public string CurrentCatalog { get; set; } = "Всі книги";
 
-        public IndexModel(IAllBooks allBooks, IAllGenres allGenres)
+        public IndexModel(IAllBooks allBooks, IAllGenres allGenres, Data.models.ShopCart shopCart)
         {
             _allBooks = allBooks;
 
             _allGenres = allGenres;
 
             AllBooks = _allBooks.Books;
+
+            _shopCart = shopCart;
         }
 
         public void OnGet()
@@ -100,6 +104,21 @@ namespace Book_Shop.Pages.Books
             }
 
             SortSelector = new SelectList(source, CurrentSelector);
+        }
+
+        //Метод додавання і переходу в корзину
+        public IActionResult OnPostAddToShopCart(int Bookid)
+        {
+            var item = _allBooks.Books.FirstOrDefault(i => i.Id == Bookid);
+
+            if (item != null)
+            {
+                _shopCart.AddToCart(item);
+            }
+            //Redirect("ShopCart");
+            //Redirect("../ShopCart/");
+            return RedirectToPage("/ShopCart/Index");
+            //OnGet();
         }
     }
 }
