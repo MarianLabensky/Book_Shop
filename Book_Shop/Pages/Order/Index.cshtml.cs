@@ -40,6 +40,7 @@ namespace Book_Shop.Pages.Order
             if (ModelState.IsValid == true)
             {
                 AllOrders.CreateOrder(order);
+                ShopCart.DeleteShopCart(ShopCart.ShopCartId);
                 OnGetComplete();
             }
 

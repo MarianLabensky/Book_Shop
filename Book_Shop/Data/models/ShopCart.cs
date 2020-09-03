@@ -66,5 +66,18 @@ namespace Book_Shop.Data.models
         {
             return AppDBContent.ShopCartItems.Where(c => c.ShopCartId == ShopCartId).Include(s => s.Book).ThenInclude(q => q.BookGenre).ToList();
         }
+
+        // видалити список покупок одного користувача(за ShopCartId) 
+        public void DeleteShopCart(string shopCartId)
+        {
+            List<ShopCartItem> items = AppDBContent.ShopCartItems.Where(c => c.ShopCartId == shopCartId).ToList();
+
+            if (items.Count != 0)
+            {
+                AppDBContent.ShopCartItems.RemoveRange(items);
+            }
+
+            AppDBContent.SaveChanges();
+        }
     }
 }
