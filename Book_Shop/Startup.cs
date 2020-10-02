@@ -17,11 +17,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-//TODO:   Çðîáèòè øëÿõ books/{genre}/{bookName} íà îñíîâ³ razor pages
-//        Ñòâîðèòè razor-ñòîð³íêó æàíð³â genre/
-//        Ïðè âèáîð³ æàíðó ïåðåíàïðàâëåííÿ íà books/{genre}
+//TODO:   Ã‡Ã°Ã®Ã¡Ã¨Ã²Ã¨ Ã¸Ã«Ã¿Ãµ books/{genre}/{bookName} Ã­Ã  Ã®Ã±Ã­Ã®Ã¢Â³ razor pages
+//        Ã‘Ã²Ã¢Ã®Ã°Ã¨Ã²Ã¨ razor-Ã±Ã²Ã®Ã°Â³Ã­ÃªÃ³ Ã¦Ã Ã­Ã°Â³Ã¢ genre/
+//        ÃÃ°Ã¨ Ã¢Ã¨Ã¡Ã®Ã°Â³ Ã¦Ã Ã­Ã°Ã³ Ã¯Ã¥Ã°Ã¥Ã­Ã Ã¯Ã°Ã Ã¢Ã«Ã¥Ã­Ã­Ã¿ Ã­Ã  books/{genre}
 
-
+//kjhfdlvkshdflvkjzdfvlkzjfdhvlzkdfj
 
 namespace Book_Shop
 {
@@ -76,14 +76,14 @@ namespace Book_Shop
 
             app.UseHttpsRedirection();
 
-            app.UseStatusCodePages(); // Â³äîáðàæåííÿ ñòàòóñ ³ êîä ñòîð³íêè
+            app.UseStatusCodePages(); // Ã‚Â³Ã¤Ã®Ã¡Ã°Ã Ã¦Ã¥Ã­Ã­Ã¿ Ã±Ã²Ã Ã²Ã³Ã± Â³ ÃªÃ®Ã¤ Ã±Ã²Ã®Ã°Â³Ã­ÃªÃ¨
 
-            app.UseStaticFiles(); // Â³äîáðàæåííÿ ñòàòè÷íèõ ôàéë³â(êàðòèíêè ³ òä.)
+            app.UseStaticFiles(); // Ã‚Â³Ã¤Ã®Ã¡Ã°Ã Ã¦Ã¥Ã­Ã­Ã¿ Ã±Ã²Ã Ã²Ã¨Ã·Ã­Ã¨Ãµ Ã´Ã Ã©Ã«Â³Ã¢(ÃªÃ Ã°Ã²Ã¨Ã­ÃªÃ¨ Â³ Ã²Ã¤.)
 
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseSession(); // Äëÿ ñåñ³é îáîâ'ÿçêîâî
+            app.UseSession(); // Ã„Ã«Ã¿ Ã±Ã¥Ã±Â³Ã© Ã®Ã¡Ã®Ã¢'Ã¿Ã§ÃªÃ®Ã¢Ã®
 
             app.UseEndpoints(endpoints =>
             {
