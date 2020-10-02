@@ -66,6 +66,7 @@ namespace Book_Shop
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.AddEfDiagrams<AppDBContext>();
             }
             else
             {
